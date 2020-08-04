@@ -1,14 +1,15 @@
 import React from "react";
 import { findDOMNode } from "react-dom";
 import Trigger, { TriggerProps, feedbackToPlacement } from "react-widget-trigger";
+import offset from "dom-helpers-extra/offset";
 
 export interface TooltipProps
 	extends Omit<TriggerProps, "popup" | "defaultPopupVisible" | "popupVisible"> {
 	title?: React.ReactNode | (() => React.ReactNode);
 	defaultVisible?: boolean;
 	visible?: boolean;
-
-	color?: string;
+	// TODO:
+	// color?: string;
 
 	trigger?: TriggerProps["action"];
 
@@ -37,12 +38,18 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 	triggerRef: React.RefObject<Trigger> = React.createRef();
 
 	adjustArrowPosition: TriggerProps["adjustPosition"] = (_, pos, feedback) => {
-		const { visibieArrow } = this.props;
+		const { visibieArrow, keepArrowAtCenter } = this.props;
 		if (!visibieArrow) return;
 		if (!this.triggerRef.current) return;
 
 		const arrowNode = this.arrowRef.current;
 		if (!arrowNode) return;
+
+		//reset
+		arrowNode.style.left = "";
+		arrowNode.style.top = "";
+
+		if (!keepArrowAtCenter) return;
 
 		const triggerNode = this.triggerRef.current.getTriggerNode();
 		const popupNode = this.triggerRef.current.getPopupNode() as HTMLDivElement;
@@ -54,25 +61,25 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 		const popupWidth = popupNode.offsetWidth;
 		const popupHeight = popupNode.offsetHeight;
 
-		console.log(placement);
+		const rect = triggerNode.getBoundingClientRect();
 
 		if (/^(top|bottom)/.test(placement)) {
 			if (triggerWidth > popupWidth) {
-				arrowNode.style.top = "";
-				arrowNode.style.marginTop = "";
 				arrowNode.style.left = "50%";
-				arrowNode.style.marginLeft = `-${arrowNode.offsetWidth / 2}px`;
 			} else {
-				//TODO
+				const m = rect.left + triggerWidth / 2 - arrowNode.offsetWidth / 2;
+				offset(arrowNode, {
+					left: m,
+				});
 			}
 		} else {
 			if (triggerHeight > popupHeight) {
-				arrowNode.style.left = "";
-				arrowNode.style.marginLeft = "";
 				arrowNode.style.top = "50%";
-				arrowNode.style.marginTop = `-${arrowNode.offsetHeight / 2}px`;
 			} else {
-				//TODO
+				const m = rect.top + triggerHeight / 2 - arrowNode.offsetHeight / 2;
+				offset(arrowNode, {
+					top: m,
+				});
 			}
 		}
 	};
@@ -102,7 +109,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			offset,
 			visibieArrow,
 			keepArrowAtCenter,
-			color,
+			// color,
 			...restProps
 		} = this.props;
 
@@ -110,7 +117,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			<Trigger
 				{...restProps}
 				ref={this.triggerRef}
-				adjustPosition={keepArrowAtCenter ? this.adjustArrowPosition : undefined}
+				adjustPosition={this.adjustArrowPosition}
 				offset={visibieArrow ? offset! + arrowSize! : offset}
 				defaultPopupVisible={defaultVisible}
 				popupVisible={visible}

@@ -16,7 +16,7 @@ function TooltipButton({ text, ...props }) {
 	return (
 		<Tooltip
 			// maskClosable={false}
-			title="Title"
+			title="Title----111itle----111itle----111"
 			content="Content"
 			{...props}
 		>
