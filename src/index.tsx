@@ -1,10 +1,18 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
-import Trigger, { TriggerProps, feedbackToPlacement } from "react-widget-trigger";
+import Trigger, { TriggerProps, feedbackToPlacement, Feedback } from "react-widget-trigger";
 import offset from "dom-helpers-extra/offset";
 
 export interface TooltipProps
-	extends Omit<TriggerProps, "popup" | "defaultPopupVisible" | "popupVisible"> {
+	extends Omit<
+		TriggerProps,
+		| "popup"
+		| "defaultPopupVisible"
+		| "popupVisible"
+		| "destroyPopupOnHide"
+		| "action"
+		| "popupTransition"
+		| "adjustPosition"
+	> {
 	title?: React.ReactNode | (() => React.ReactNode);
 	defaultVisible?: boolean;
 	visible?: boolean;
@@ -15,11 +23,16 @@ export interface TooltipProps
 
 	offset?: number;
 
-	visibieArrow?: boolean;
+	visibleArrow?: boolean;
 	arrowSize?: number;
 	keepArrowAtCenter?: boolean;
+	destroyTooltipOnHide?: boolean;
+
+	transition?: TriggerProps["popupTransition"];
 
 	onVisibleChange?: (visible: boolean) => void;
+
+	role?: string;
 }
 
 export interface TooltipState {}
@@ -28,18 +41,42 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 	static defaultProps: TooltipProps = {
 		prefixCls: "rw-tooltip",
 		defaultVisible: false,
-		visibieArrow: true,
+		visibleArrow: true,
+		keepArrowAtCenter: false,
+		destroyTooltipOnHide: true,
 		arrowSize: 6,
 		offset: 0,
-		keepArrowAtCenter: false,
+		delay: 100,
+		trigger: ["hover"],
+		outsideHideEventName: ["mousedown", "click"],
+		transition: {
+			classNames: {
+				appear: "tooltip-animated",
+				appearActive: "tooltip-fade-in",
+				appearDone: "",
+				enter: "tooltip-animated",
+				enterActive: "tooltip-fade-in",
+				enterDone: "",
+				exit: "tooltip-animated",
+				exitActive: "tooltip-fade-out",
+				exitDone: "",
+			},
+			timeout: 290,
+		},
+		role: "tooltip",
 	};
 
 	arrowRef: React.RefObject<HTMLDivElement> = React.createRef();
 	triggerRef: React.RefObject<Trigger> = React.createRef();
+	feedback: Feedback | null;
 
-	adjustArrowPosition: TriggerProps["adjustPosition"] = (_, pos, feedback) => {
-		const { visibieArrow, keepArrowAtCenter } = this.props;
-		if (!visibieArrow) return;
+	adjustArrowPosition = () => {
+		const feedback = this.feedback;
+
+		if (!feedback) return;
+
+		const { visibleArrow, keepArrowAtCenter } = this.props;
+		if (!visibleArrow) return;
 		if (!this.triggerRef.current) return;
 
 		const arrowNode = this.arrowRef.current;
@@ -82,19 +119,35 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 				});
 			}
 		}
+
+		//reset
+		this.feedback = null;
 	};
 
+	saveFeedback: TriggerProps["adjustPosition"] = (_, __, feedback) => {
+		this.feedback = feedback;
+	};
+
+	componentDidMount() {
+		this.componentDidUpdate();
+	}
+	componentDidUpdate() {
+		this.adjustArrowPosition();
+	}
+
 	getPopup = () => {
-		const { prefixCls, title, visibieArrow } = this.props;
+		const { prefixCls, title, visibleArrow, role } = this.props;
 
 		const titleNode = typeof title === "function" ? title() : title;
 
 		return (
 			<>
-				{visibieArrow ? (
+				{visibleArrow ? (
 					<div className={`${prefixCls}-arrow`} ref={this.arrowRef}></div>
 				) : null}
-				<div className={`${prefixCls}-inner`}>{titleNode}</div>
+				<div className={`${prefixCls}-inner`} role={role}>
+					{titleNode}
+				</div>
 			</>
 		);
 	};
@@ -107,8 +160,11 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			trigger,
 			arrowSize,
 			offset,
-			visibieArrow,
+			visibleArrow,
 			keepArrowAtCenter,
+			destroyTooltipOnHide,
+			transition,
+			role,
 			// color,
 			...restProps
 		} = this.props;
@@ -117,8 +173,11 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			<Trigger
 				{...restProps}
 				ref={this.triggerRef}
-				adjustPosition={this.adjustArrowPosition}
-				offset={visibieArrow ? offset! + arrowSize! : offset}
+				popupTransition={transition}
+				action={trigger}
+				adjustPosition={this.saveFeedback}
+				offset={visibleArrow ? offset! + arrowSize! : offset}
+				destroyPopupOnHide={destroyTooltipOnHide}
 				defaultPopupVisible={defaultVisible}
 				popupVisible={visible}
 				popup={this.getPopup}

@@ -33,12 +33,11 @@
     text-align: left;
     text-decoration: none;
     word-wrap: break-word;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 2px;
-    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
 }
-
 
 .rw-tooltip-arrow {
     position: absolute;
@@ -50,71 +49,97 @@
     box-sizing: border-box;
 }
 
-.rw-tooltip-placement-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-top-right>.rw-tooltip-arrow {
+.rw-tooltip-placement-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-top-right > .rw-tooltip-arrow {
     bottom: -5px;
-    margin-left: -5px;
     border-width: 5px 5px 0;
-    border-top-color: rgba(0, 0, 0, .75);
+    border-top-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-bottom>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
+.rw-tooltip-placement-bottom > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
     top: -5px;
-    margin-left: -5px;
     border-width: 0 5px 5px;
-    border-bottom-color: rgba(0, 0, 0, .75);
+    border-bottom-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow {
+.rw-tooltip-placement-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow {
     right: -5px;
-    margin-top: -5px;
     border-width: 5px 0 5px 5px;
-    border-left-color: rgba(0, 0, 0, .75);
+    border-left-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-right>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
+.rw-tooltip-placement-right > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
     left: -5px;
-    margin-top: -5px;
     border-width: 5px 5px 5px 0;
-    border-right-color: rgba(0, 0, 0, .75);
+    border-right-color: rgba(0, 0, 0, 0.9);
 }
 
-
-.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow {
-    left: 10px;
+.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow {
+    left: 16px;
 }
 
-.rw-tooltip-placement-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom>.rw-tooltip-arrow {
+.rw-tooltip-placement-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom > .rw-tooltip-arrow {
     left: 50%;
     margin-left: -5px;
 }
 
-.rw-tooltip-placement-top-right>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
-    right: 5px;
+.rw-tooltip-placement-top-right > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
+    right: 16px;
 }
 
-.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-top>.rw-tooltip-arrow {
-    top: 10px;
+.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-top > .rw-tooltip-arrow {
+    top: 8px;
 }
 
-.rw-tooltip-placement-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-right>.rw-tooltip-arrow {
+.rw-tooltip-placement-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-right > .rw-tooltip-arrow {
     top: 50%;
     margin-top: -5px;
 }
 
-.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
-    bottom: 5px;
+.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
+    bottom: 8px;
+}
+
+.tooltip-animated {
+    animation-duration: 0.3s;
+}
+
+.tooltip-fade-in {
+    animation-name: TooltipFadeIn;
+}
+
+.tooltip-fade-out {
+    animation-name: TooltipFadeOut;
+}
+
+@keyframes TooltipFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+@keyframes TooltipFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
