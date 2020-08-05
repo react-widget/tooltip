@@ -1,5 +1,5 @@
 {
-	"name": "react-widget-popover/style",
+	"name": "react-widget-tooltip/style",
 	"private": true,
 	"main": "../cjs/style/index.js",
 	"module": "../esm/style/index.js"
