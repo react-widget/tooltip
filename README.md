@@ -40,6 +40,10 @@ export default function App() {
 
 ```ts
 export interface TooltipProps extends Omit<TriggerProps, "popup" | "defaultPopupVisible" | "popupVisible" | "destroyPopupOnHide" | "action" | "popupTransition" | "adjustPosition"> {
+    /** 提示框样式 */
+    className?: string;
+    /** 提示框样式属性 */
+	style?: React.CSSProperties;
     /** 提示文字 */
     title?: React.ReactNode | (() => React.ReactNode);
     /** 提示框位置，可选 top left right bottom topLeft topRight bottomLeft bottomRight leftTop leftBottom rightTop rightBottom */

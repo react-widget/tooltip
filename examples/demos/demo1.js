@@ -30,7 +30,7 @@ export default class DEMO extends Component {
 	render() {
 		return (
 			<div>
-				<TooltipButton placement="bottomLeft" />
+				<TooltipButton placement="bottomLeft" style={{ border: "1px solid red" }} />
 				<TooltipButton placement="bottom" />
 				<TooltipButton placement="bottomRight" />
 				<hr />

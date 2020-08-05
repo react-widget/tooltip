@@ -1,6 +1,6 @@
 {
 	"name": "react-widget-tooltip",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "react-widget-tooltip",
 	"main": "cjs/index.js",
 	"module": "esm/index.js",
@@ -40,7 +40,7 @@
 		"@babel/runtime": "^7.9.2",
 		"classnames": "^2.2.6",
 		"dom-helpers-extra": "^0.2.1",
-		"react-widget-trigger": "^2.0.8"
+		"react-widget-trigger": "^2.0.10"
 	},
 	"author": "nobo.zhou@foxmail.com",
 	"license": "MIT",

@@ -13,7 +13,13 @@ export interface TooltipProps
 		| "action"
 		| "popupTransition"
 		| "adjustPosition"
+		| "popupClassName"
+		| "popupStyle"
 	> {
+	/** 提示框样式 */
+	className?: string;
+	/** 提示框样式属性 */
+	style?: React.CSSProperties;
 	/** 提示文字 */
 	title?: React.ReactNode | (() => React.ReactNode);
 	/** 提示框位置，可选 top left right bottom topLeft topRight bottomLeft bottomRight leftTop leftBottom rightTop rightBottom */
@@ -169,6 +175,8 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 
 	render() {
 		const {
+			className,
+			style,
 			title,
 			visible,
 			defaultVisible,
@@ -188,6 +196,8 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			<Trigger
 				{...restProps}
 				ref={this.triggerRef}
+				popupClassName={className}
+				popupStyle={style}
 				popupTransition={this.getDefaultTransition()}
 				action={trigger}
 				adjustPosition={this.saveFeedback}
