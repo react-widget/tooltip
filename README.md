@@ -29,7 +29,7 @@ export default function App() {
         title="...Tooltip..."
       >
         <button>试试</button>
-      </Trigger>
+      </Tooltip>
     </div>
   );
 }
