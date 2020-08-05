@@ -58,33 +58,32 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 		delay: 100,
 		trigger: ["hover"],
 		outsideHideEventName: ["mousedown", "click"],
-		transition: {
-			classNames: {
-				appear: "tooltip-animated",
-				appearActive: "tooltip-fade-in",
-				appearDone: "",
-				enter: "tooltip-animated",
-				enterActive: "tooltip-fade-in",
-				enterDone: "",
-				exit: "tooltip-animated",
-				exitActive: "tooltip-fade-out",
-				exitDone: "",
-			},
-			timeout: 290,
-			// addEndListener(node: HTMLElement, cb: () => void) {
-			// 	const next = () => {
-			// 		node.removeEventListener("animationend", next);
-			// 		cb();
-			// 	};
-			// 	node.addEventListener("animationend", next);
-			// },
-		},
 		role: "tooltip",
 	};
 
 	arrowRef: React.RefObject<HTMLDivElement> = React.createRef();
 	triggerRef: React.RefObject<Trigger> = React.createRef();
 	feedback: Feedback | null;
+
+	getDefaultTransition(): TriggerProps["popupTransition"] {
+		const { prefixCls } = this.props;
+		return "transition" in this.props
+			? this.props.transition
+			: {
+					classNames: {
+						appear: prefixCls + "-animated",
+						appearActive: prefixCls + "-fade-in",
+						appearDone: prefixCls + "-appear-done",
+						enter: prefixCls + "-animated",
+						enterActive: prefixCls + "-fade-in",
+						enterDone: prefixCls + "-enter-done",
+						exit: prefixCls + "-animated",
+						exitActive: prefixCls + "-fade-out",
+						exitDone: prefixCls + "-exit-done",
+					},
+					timeout: 180,
+			  };
+	}
 
 	adjustArrowPosition = () => {
 		const feedback = this.feedback;
@@ -189,7 +188,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			<Trigger
 				{...restProps}
 				ref={this.triggerRef}
-				popupTransition={transition}
+				popupTransition={this.getDefaultTransition()}
 				action={trigger}
 				adjustPosition={this.saveFeedback}
 				offset={visibleArrow ? offset! + arrowSize! : offset}

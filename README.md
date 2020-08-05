@@ -83,20 +83,6 @@ export interface TooltipProps extends Omit<TriggerProps, "popup" | "defaultPopup
 	delay: 100,
 	trigger: ["hover"],
 	outsideHideEventName: ["mousedown", "click"],
-	transition: {
-		classNames: {
-			appear: "tooltip-animated",
-			appearActive: "tooltip-fade-in",
-			appearDone: "",
-			enter: "tooltip-animated",
-			enterActive: "tooltip-fade-in",
-			enterDone: "",
-			exit: "tooltip-animated",
-			exitActive: "tooltip-fade-out",
-			exitDone: "",
-		},
-		timeout: 300,
-	},
 }
 ```
 
@@ -154,80 +140,84 @@ export interface TooltipProps extends Omit<TriggerProps, "popup" | "defaultPopup
     box-sizing: border-box;
 }
 
-.rw-tooltip-placement-top > .rw-tooltip-arrow,
-.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
-.rw-tooltip-placement-top-right > .rw-tooltip-arrow {
+.rw-tooltip-placement-top>.rw-tooltip-arrow,
+.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
+.rw-tooltip-placement-top-right>.rw-tooltip-arrow {
     bottom: -5px;
     border-width: 5px 5px 0;
     border-top-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-bottom > .rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
+.rw-tooltip-placement-bottom>.rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
     top: -5px;
     border-width: 0 5px 5px;
     border-bottom-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-left > .rw-tooltip-arrow,
-.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
-.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow {
+.rw-tooltip-placement-left>.rw-tooltip-arrow,
+.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
+.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow {
     right: -5px;
     border-width: 5px 0 5px 5px;
     border-left-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-right > .rw-tooltip-arrow,
-.rw-tooltip-placement-right-top > .rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
+.rw-tooltip-placement-right>.rw-tooltip-arrow,
+.rw-tooltip-placement-right-top>.rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
     left: -5px;
     border-width: 5px 5px 5px 0;
     border-right-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow {
+.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow {
     left: 16px;
 }
 
-.rw-tooltip-placement-top > .rw-tooltip-arrow,
-.rw-tooltip-placement-bottom > .rw-tooltip-arrow {
+.rw-tooltip-placement-top>.rw-tooltip-arrow,
+.rw-tooltip-placement-bottom>.rw-tooltip-arrow {
     left: 50%;
     margin-left: -5px;
 }
 
-.rw-tooltip-placement-top-right > .rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
+.rw-tooltip-placement-top-right>.rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
     right: 16px;
 }
 
-.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
-.rw-tooltip-placement-right-top > .rw-tooltip-arrow {
+.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
+.rw-tooltip-placement-right-top>.rw-tooltip-arrow {
     top: 8px;
 }
 
-.rw-tooltip-placement-left > .rw-tooltip-arrow,
-.rw-tooltip-placement-right > .rw-tooltip-arrow {
+.rw-tooltip-placement-left>.rw-tooltip-arrow,
+.rw-tooltip-placement-right>.rw-tooltip-arrow {
     top: 50%;
     margin-top: -5px;
 }
 
-.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
+.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
     bottom: 8px;
 }
 
-.tooltip-animated {
-    animation-duration: 0.3s;
+.rw-tooltip-animated {
+    animation-duration: 0.2s;
 }
 
-.tooltip-fade-in {
+.rw-tooltip-fade-in {
     animation-name: TooltipFadeIn;
 }
 
-.tooltip-fade-out {
+.rw-tooltip-fade-out {
     animation-name: TooltipFadeOut;
+}
+
+.rw-tooltip-exit-done {
+    opacity: 0;
 }
 
 @keyframes TooltipFadeIn {
@@ -239,6 +229,7 @@ export interface TooltipProps extends Omit<TriggerProps, "popup" | "defaultPopup
         opacity: 1;
     }
 }
+
 @keyframes TooltipFadeOut {
     from {
         opacity: 1;
