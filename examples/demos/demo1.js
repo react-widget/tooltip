@@ -14,8 +14,8 @@ const animateClassNames = {
 
 function TooltipButton({ text, ...props }) {
 	return (
-		<Tooltip title="Title----111itle----111itle----111" {...props}>
-			<button>{text || props.placement}</button>
+		<Tooltip title={"-----" + props.placement + "-----"} {...props}>
+			<button>{props.placement}</button>
 		</Tooltip>
 	);
 }
@@ -30,7 +30,7 @@ export default class DEMO extends Component {
 	render() {
 		return (
 			<div>
-				<TooltipButton placement="bottomLeft" style={{ border: "1px solid red" }} />
+				<TooltipButton placement="bottomLeft" />
 				<TooltipButton placement="bottom" />
 				<TooltipButton placement="bottomRight" />
 				<hr />

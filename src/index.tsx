@@ -77,17 +77,17 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			? this.props.transition
 			: {
 					classNames: {
-						appear: prefixCls + "-animated",
-						appearActive: prefixCls + "-fade-in",
-						appearDone: prefixCls + "-appear-done",
-						enter: prefixCls + "-animated",
-						enterActive: prefixCls + "-fade-in",
+						appear: prefixCls + "-enter",
+						appearActive: prefixCls + "-enter-active",
+						appearDone: prefixCls + "-enter-done",
+						enter: prefixCls + "-enter",
+						enterActive: prefixCls + "-enter-active",
 						enterDone: prefixCls + "-enter-done",
-						exit: prefixCls + "-animated",
-						exitActive: prefixCls + "-fade-out",
+						exit: prefixCls + "-exit",
+						exitActive: prefixCls + "-exit-active",
 						exitDone: prefixCls + "-exit-done",
 					},
-					timeout: 180,
+					timeout: 200,
 			  };
 	}
 

@@ -94,154 +94,137 @@ export interface TooltipProps extends Omit<TriggerProps, "popup" | "defaultPopup
 
 ```css
 .rw-tooltip-root {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
 }
 
 .rw-tooltip {
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 14px;
-    z-index: 2000;
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-size: 14px;
+	z-index: 2000;
 }
 
 .rw-tooltip-mask {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: #000;
-    opacity: 0.1;
-    z-index: 2000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	opacity: 0.1;
+	z-index: 2000;
 }
 
 .rw-tooltip-inner {
-    position: relative;
-    min-width: 30px;
-    min-height: 32px;
-    padding: 6px 8px;
-    color: #fff;
-    text-align: left;
-    text-decoration: none;
-    word-wrap: break-word;
-    background-color: rgba(0, 0, 0, 0.9);
-    border-radius: 2px;
-    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
+	position: relative;
+	min-width: 30px;
+	min-height: 32px;
+	padding: 6px 8px;
+	color: #fff;
+	text-align: left;
+	text-decoration: none;
+	word-wrap: break-word;
+	background-color: rgba(0, 0, 0, 0.9);
+	border-radius: 2px;
+	box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+		0 9px 28px 8px rgba(0, 0, 0, 0.05);
+	box-sizing: border-box;
 }
 
 .rw-tooltip-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
 
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.rw-tooltip-placement-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-top-right>.rw-tooltip-arrow {
-    bottom: -5px;
-    border-width: 5px 5px 0;
-    border-top-color: rgba(0, 0, 0, 0.9);
+.rw-tooltip-placement-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-top-right > .rw-tooltip-arrow {
+	bottom: -5px;
+	border-width: 5px 5px 0;
+	border-top-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-bottom>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
-    top: -5px;
-    border-width: 0 5px 5px;
-    border-bottom-color: rgba(0, 0, 0, 0.9);
+.rw-tooltip-placement-bottom > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
+	top: -5px;
+	border-width: 0 5px 5px;
+	border-bottom-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow {
-    right: -5px;
-    border-width: 5px 0 5px 5px;
-    border-left-color: rgba(0, 0, 0, 0.9);
+.rw-tooltip-placement-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow {
+	right: -5px;
+	border-width: 5px 0 5px 5px;
+	border-left-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-right>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
-    left: -5px;
-    border-width: 5px 5px 5px 0;
-    border-right-color: rgba(0, 0, 0, 0.9);
+.rw-tooltip-placement-right > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
+	left: -5px;
+	border-width: 5px 5px 5px 0;
+	border-right-color: rgba(0, 0, 0, 0.9);
 }
 
-.rw-tooltip-placement-top-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-left>.rw-tooltip-arrow {
-    left: 16px;
+.rw-tooltip-placement-top-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-left > .rw-tooltip-arrow {
+	left: 16px;
 }
 
-.rw-tooltip-placement-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom>.rw-tooltip-arrow {
-    left: 50%;
-    margin-left: -5px;
+.rw-tooltip-placement-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom > .rw-tooltip-arrow {
+	left: 50%;
+	margin-left: -5px;
 }
 
-.rw-tooltip-placement-top-right>.rw-tooltip-arrow,
-.rw-tooltip-placement-bottom-right>.rw-tooltip-arrow {
-    right: 16px;
+.rw-tooltip-placement-top-right > .rw-tooltip-arrow,
+.rw-tooltip-placement-bottom-right > .rw-tooltip-arrow {
+	right: 16px;
 }
 
-.rw-tooltip-placement-left-top>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-top>.rw-tooltip-arrow {
-    top: 8px;
+.rw-tooltip-placement-left-top > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-top > .rw-tooltip-arrow {
+	top: 8px;
 }
 
-.rw-tooltip-placement-left>.rw-tooltip-arrow,
-.rw-tooltip-placement-right>.rw-tooltip-arrow {
-    top: 50%;
-    margin-top: -5px;
+.rw-tooltip-placement-left > .rw-tooltip-arrow,
+.rw-tooltip-placement-right > .rw-tooltip-arrow {
+	top: 50%;
+	margin-top: -5px;
 }
 
-.rw-tooltip-placement-left-bottom>.rw-tooltip-arrow,
-.rw-tooltip-placement-right-bottom>.rw-tooltip-arrow {
-    bottom: 8px;
+.rw-tooltip-placement-left-bottom > .rw-tooltip-arrow,
+.rw-tooltip-placement-right-bottom > .rw-tooltip-arrow {
+	bottom: 8px;
 }
 
-.rw-tooltip-animated {
-    animation-duration: 0.2s;
+.rw-tooltip-enter {
+	opacity: 0;
 }
 
-.rw-tooltip-fade-in {
-    animation-name: TooltipFadeIn;
+.rw-tooltip-enter-active {
+	opacity: 1;
+	transition: opacity 200ms;
 }
 
-.rw-tooltip-fade-out {
-    animation-name: TooltipFadeOut;
+.rw-tooltip-exit {
+	opacity: 1;
 }
 
-.rw-tooltip-exit-done {
-    opacity: 0;
-}
-
-@keyframes TooltipFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes TooltipFadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
+.rw-tooltip-exit-active {
+	opacity: 0;
+	transition: opacity 200ms;
 }
 
 ```
