@@ -15,6 +15,7 @@ export interface TooltipProps
 		| "adjustPosition"
 		| "popupClassName"
 		| "popupStyle"
+		| "onPopupVisibleChange"
 	> {
 	/** 提示框样式 */
 	className?: string;
@@ -187,6 +188,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 			keepArrowAtCenter,
 			destroyTooltipOnHide,
 			transition,
+			onVisibleChange,
 			role,
 			// color,
 			...restProps
@@ -206,6 +208,7 @@ export class Tooltip extends React.Component<TooltipProps, TooltipState> {
 				defaultPopupVisible={defaultVisible}
 				popupVisible={visible}
 				popup={this.getPopup}
+				onPopupVisibleChange={onVisibleChange}
 			/>
 		);
 	}
